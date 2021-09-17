@@ -6,3 +6,4 @@
       apt: update_cache=yes
       changed_when: False
   tasks:
+    - include: tasks/java.yml
