@@ -1,9 +1,6 @@
 - hosts: localhost
-  become: true
   vars:
+    personal: "{{ lookup('env', 'HOME') }}/repos/personal"
   pre_tasks:
-    - name: update repositories
-      apt: update_cache=yes
-      changed_when: False
   tasks:
-    - include: tasks/java.yml
+    - include: tasks/personal-projects.yml

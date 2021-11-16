@@ -1,0 +1,408 @@
+- name: Harpoon exists
+  stat:
+    path: "{{ personal }}/nix-dotfiles"
+  register: nix_dotfiles
+  tags:
+    - install
+    - personal-project
+- name: Personal Project nix-dotfiles
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/nix-dotfiles.git"
+    bare: false
+    dest: "{{ personal }}/nix-dotfiles"
+  tags:
+    - install
+    - personal-project
+  when: nix_dotfiles.stat.exists == False
+
+- name: git-worktree exists
+  stat:
+    path: "{{ personal }}/git-worktree.nvim"
+  register: worktree
+  tags:
+    - install
+    - personal-project
+- name: Personal Project Git-Worktrees
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/git-worktree.nvim.git"
+    bare: true
+    dest: "{{ personal }}/git-worktree.nvim/.bare"
+  tags:
+    - install
+    - personal-project
+  when: worktree.stat.exists == False
+- name: Git worktree Setup git dir
+  copy:
+    dest: "~/repos/personal/git-worktree.nvim/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: worktree.stat.exists == False
+- name: Git worktree fix remote fetch
+  shell: cd ~/repos/personal/git-worktree.nvim && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: worktree.stat.exists == False
+- name: Git worktree Master Checkout
+  shell: cd ~/repos/personal/git-worktree.nvim && git fetch && git worktree add master master
+  tags:
+    - install
+    - personal-project
+  when: worktree.stat.exists == False
+- name: Git worktree Upstream
+  shell: cd ~/repos/personal/git-worktree.nvim && git remote add upstream https://github.com/ThePrimeagen/git-worktree.nvim.git && git fetch --all
+  tags:
+    - install
+    - personal-project
+  when: worktree.stat.exists == False
+
+- name: beancount-language-server exists
+  stat:
+    path: "{{ personal }}/beancount-language-server"
+  register: beancount_lsp
+  tags:
+    - install
+    - personal-project
+- name: Personal Project beancount-language-server
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/beancount-language-server.git"
+    bare: true
+    dest: "{{ personal }}/beancount-language-server/.bare"
+  tags:
+    - install
+    - personal-project
+  when: beancount_lsp.stat.exists == False
+- name: beancount-language-server Setup git dir
+  copy:
+    dest: "~/repos/personal/beancount-language-server/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: beancount_lsp.stat.exists == False
+- name: beancount-language-server fix remote fetch
+  shell: cd ~/repos/personal/beancount-language-server && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: beancount_lsp.stat.exists == False
+- name: beancount-language-server Master Checkout
+  shell: cd ~/repos/personal/beancount-language-server && git fetch && git worktree add master master
+  tags:
+    - install
+    - personal-project
+  when: beancount_lsp.stat.exists == False
+- name: beancount-language-server develop Checkout
+  shell: cd ~/repos/personal/beancount-language-server && git fetch && git worktree add develop develop
+  tags:
+    - install
+    - personal-project
+  when: beancount_lsp.stat.exists == False
+
+- name: fava-envelope exists
+  stat:
+    path: "{{ personal }}/fava-envelope"
+  register: fava_envelope
+  tags:
+    - install
+    - personal-project
+- name: Personal Project fava-envelope
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/fava-envelope.git"
+    bare: true
+    dest: "{{ personal }}/fava-envelope/.bare"
+  tags:
+    - install
+    - personal-project
+  when: fava_envelope.stat.exists == False
+- name: fava-envelope Setup git dir
+  copy:
+    dest: "~/repos/personal/fava-envelope/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: fava_envelope.stat.exists == False
+- name: fava-envelope fix remote fetch
+  shell: cd ~/repos/personal/fava-envelope && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: fava_envelope.stat.exists == False
+- name: fava-envelope Master Checkout
+  shell: cd ~/repos/personal/fava-envelope && git fetch && git worktree add master master
+  tags:
+    - install
+    - personal-project
+  when: fava_envelope.stat.exists == False
+
+- name: brianryall.xyz exists
+  stat:
+    path: "{{ personal }}/brianryall.xyz"
+  register: brianryall_xyz
+  tags:
+    - install
+    - personal-project
+- name: Personal Project brianryall.xyz
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/brianryall.xyz.git"
+    bare: true
+    dest: "{{ personal }}/brianryall.xyz/.bare"
+  tags:
+    - install
+    - personal-project
+  when: brianryall_xyz.stat.exists == False
+- name: brianryall.xyz Setup git dir
+  copy:
+    dest: "~/repos/personal/brianryall.xyz/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: brianryall_xyz.stat.exists == False
+- name: brianryall.xyz fix remote fetch
+  shell: cd ~/repos/personal/brianryall.xyz && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: brianryall_xyz.stat.exists == False
+- name: brianryall.xyz Master Checkout
+  shell: cd ~/repos/personal/brianryall.xyz && git fetch && git worktree add main main
+  tags:
+    - install
+    - personal-project
+  when: brianryall_xyz.stat.exists == False
+
+- name: beancount.nvim exists
+  stat:
+    path: "{{ personal }}/beancount.nvim"
+  register: beancount_nvim
+  tags:
+    - install
+    - personal-project
+- name: Personal Project beancount.nvim
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/beancount.nvim.git"
+    bare: true
+    dest: "{{ personal }}/beancount.nvim/.bare"
+  tags:
+    - install
+    - personal-project
+  when: beancount_nvim.stat.exists == False
+- name: beancount.nvim Setup git dir
+  copy:
+    dest: "~/repos/personal/beancount.nvim/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: beancount_nvim.stat.exists == False
+- name: beancount.nvim fix remote fetch
+  shell: cd ~/repos/personal/beancount.nvim && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: beancount_nvim.stat.exists == False
+- name: beancount.nvim Master Checkout
+  shell: cd ~/repos/personal/beancount.nvim && git fetch && git worktree add master master
+  tags:
+    - install
+    - personal-project
+  when: beancount_nvim.stat.exists == False
+
+- name: tree-sitter-beancount exists
+  stat:
+    path: "{{ personal }}/tree-sitter-beancount"
+  register: treesitter_beancount
+  tags:
+    - install
+    - personal-project
+- name: Personal Project tree-sitter-beancount
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/tree-sitter-beancount.git"
+    bare: true
+    dest: "{{ personal }}/tree-sitter-beancount/.bare"
+  tags:
+    - install
+    - personal-project
+  when: treesitter_beancount.stat.exists == False
+- name: tree-sitter-beancount Setup git dir
+  copy:
+    dest: "~/repos/personal/tree-sitter-beancount/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: treesitter_beancount.stat.exists == False
+- name: tree-sitter-beancount fix remote fetch
+  shell: cd ~/repos/personal/tree-sitter-beancount && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: treesitter_beancount.stat.exists == False
+- name: tree-sitter-beancount Master Checkout
+  shell: cd ~/repos/personal/tree-sitter-beancount && git fetch && git worktree add master master
+  tags:
+    - install
+    - personal-project
+  when: treesitter_beancount.stat.exists == False
+
+- name: dwm exists
+  stat:
+    path: "{{ personal }}/dwm"
+  register: dwm
+  tags:
+    - install
+    - personal-project
+- name: Personal Project dwm
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/dwm.git"
+    bare: true
+    dest: "{{ personal }}/dwm/.bare"
+  tags:
+    - install
+    - personal-project
+  when: dwm.stat.exists == False
+- name: dwm Setup git dir
+  copy:
+    dest: "~/repos/personal/dwm/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: dwm.stat.exists == False
+- name: dwm fix remote fetch
+  shell: cd ~/repos/personal/dwm && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: dwm.stat.exists == False
+- name: dwm Master Checkout
+  shell: cd ~/repos/personal/dwm && git fetch && git worktree add polar polar
+  tags:
+    - install
+    - personal-project
+  when: dwm.stat.exists == False
+
+- name: st exists
+  stat:
+    path: "{{ personal }}/st"
+  register: st
+  tags:
+    - install
+    - personal-project
+- name: Personal Project st
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/st.git"
+    bare: true
+    dest: "{{ personal }}/st/.bare"
+  tags:
+    - install
+    - personal-project
+  when: st.stat.exists == False
+- name: st Setup git dir
+  copy:
+    dest: "~/repos/personal/st/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: st.stat.exists == False
+- name: st fix remote fetch
+  shell: cd ~/repos/personal/st && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: st.stat.exists == False
+- name: st Master Checkout
+  shell: cd ~/repos/personal/st && git fetch && git worktree add custom custom
+  tags:
+    - install
+    - personal-project
+  when: st.stat.exists == False
+
+- name: dmenu exists
+  stat:
+    path: "{{ personal }}/dmenu"
+  register: dmenu
+  tags:
+    - install
+    - personal-project
+- name: Personal Project dmenu
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/dmenu.git"
+    bare: true
+    dest: "{{ personal }}/dmenu/.bare"
+  tags:
+    - install
+    - personal-project
+  when: dmenu.stat.exists == False
+- name: dmenu Setup git dir
+  copy:
+    dest: "~/repos/personal/dmenu/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: dmenu.stat.exists == False
+- name: dmenu fix remote fetch
+  shell: cd ~/repos/personal/dmenu && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: dmenu.stat.exists == False
+- name: dmenu Master Checkout
+  shell: cd ~/repos/personal/dmenu && git fetch && git worktree add custom custom
+  tags:
+    - install
+    - personal-project
+  when: dmenu.stat.exists == False
+
+- name: qmk_firmware exists
+  stat:
+    path: "{{ personal }}/qmk_firmware"
+  register: qmk_firmware
+  tags:
+    - install
+    - personal-project
+- name: Personal Project qmk_firmware
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/qmk_firmware.git"
+    bare: true
+    dest: "{{ personal }}/qmk_firmware/.bare"
+  tags:
+    - install
+    - personal-project
+  when: qmk_firmware.stat.exists == False
+- name: qmk_firmware Setup git dir
+  copy:
+    dest: "~/repos/personal/qmk_firmware/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: qmk_firmware.stat.exists == False
+- name: qmk_firmware fix remote fetch
+  shell: cd ~/repos/personal/qmk_firmware && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: qmk_firmware.stat.exists == False
+- name: qmk_firmware Master Checkout
+  shell: cd ~/repos/personal/qmk_firmware && git fetch && git worktree add master master
+  tags:
+    - install
+    - personal-project
+  when: qmk_firmware.stat.exists == False
