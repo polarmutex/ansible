@@ -4,6 +4,7 @@
   register: nix_dotfiles
   tags:
     - install
+    - core
     - personal-project
 - name: Personal Project nix-dotfiles
   ansible.builtin.git:
@@ -12,6 +13,7 @@
     dest: "{{ personal }}/nix-dotfiles"
   tags:
     - install
+    - core
     - personal-project
   when: nix_dotfiles.stat.exists == False
 
@@ -22,6 +24,7 @@
   tags:
     - install
     - personal-project
+    - git-worktree
 - name: Personal Project Git-Worktrees
   ansible.builtin.git:
     repo: "git@github.com:polarmutex/git-worktree.nvim.git"
@@ -30,6 +33,7 @@
   tags:
     - install
     - personal-project
+    - git-worktree
   when: worktree.stat.exists == False
 - name: Git worktree Setup git dir
   copy:
@@ -39,24 +43,28 @@
   tags:
     - install
     - personal-project
+    - git-worktree
   when: worktree.stat.exists == False
 - name: Git worktree fix remote fetch
   shell: cd ~/repos/personal/git-worktree.nvim && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
   tags:
     - install
     - personal-project
+    - git-worktree
   when: worktree.stat.exists == False
 - name: Git worktree Master Checkout
   shell: cd ~/repos/personal/git-worktree.nvim && git fetch && git worktree add master master
   tags:
     - install
     - personal-project
+    - git-worktree
   when: worktree.stat.exists == False
 - name: Git worktree Upstream
   shell: cd ~/repos/personal/git-worktree.nvim && git remote add upstream https://github.com/ThePrimeagen/git-worktree.nvim.git && git fetch --all
   tags:
     - install
     - personal-project
+    - git-worktree
   when: worktree.stat.exists == False
 
 - name: beancount-language-server exists
@@ -406,3 +414,53 @@
     - install
     - personal-project
   when: qmk_firmware.stat.exists == False
+
+- name: harpoon exists
+  stat:
+    path: "{{ personal }}/harpoon"
+  register: harpoon
+  tags:
+    - install
+    - personal-project
+    - harpoon
+- name: Personal Project harpoon
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/harpoon.git"
+    bare: true
+    dest: "{{ personal }}/harpoon/.bare"
+  tags:
+    - install
+    - personal-project
+    - harpoon
+  when: harpoon.stat.exists == False
+- name: Git worktree Setup git dir
+  copy:
+    dest: "~/repos/personal/harpoon/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+    - harpoon
+  when: harpoon.stat.exists == False
+- name: Git worktree fix remote fetch
+  shell: cd ~/repos/personal/harpoon && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+    - harpoon
+  when: harpoon.stat.exists == False
+- name: Git worktree Master Checkout
+  shell: cd ~/repos/personal/harpoon && git fetch && git worktree add master master
+  tags:
+    - install
+    - personal-project
+    - harpoon
+  when: harpoon.stat.exists == False
+- name: Git worktree Upstream
+  shell: cd ~/repos/personal/harpoon && git remote add upstream https://github.com/ThePrimeagen/harpoon.git && git fetch --all
+  tags:
+    - install
+    - personal-project
+    - harpoon
+  when: harpoon.stat.exists == False
