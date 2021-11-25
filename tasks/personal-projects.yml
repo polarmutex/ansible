@@ -514,3 +514,41 @@
     - personal-project
     - refactoring
   when: refactoring.stat.exists == False
+
+- name: tree-sitter-astro exists
+  stat:
+    path: "{{ personal }}/tree-sitter-astro"
+  register: treesitter_astro
+  tags:
+    - install
+    - personal-project
+- name: Personal Project tree-sitter-astro
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/tree-sitter-astro.git"
+    bare: true
+    dest: "{{ personal }}/tree-sitter-astro/.bare"
+  tags:
+    - install
+    - personal-project
+  when: treesitter_astro.stat.exists == False
+- name: tree-sitter-astro Setup git dir
+  copy:
+    dest: "~/repos/personal/tree-sitter-astro/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: treesitter_astro.stat.exists == False
+- name: tree-sitter-astro fix remote fetch
+  shell: cd ~/repos/personal/tree-sitter-astro && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: treesitter_astro.stat.exists == False
+- name: tree-sitter-astro Master Checkout
+  shell: cd ~/repos/personal/tree-sitter-astro && git fetch && git worktree add main main
+  tags:
+    - install
+    - personal-project
+  when: treesitter_astro.stat.exists == False
