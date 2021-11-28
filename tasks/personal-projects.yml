@@ -552,3 +552,41 @@
     - install
     - personal-project
   when: treesitter_astro.stat.exists == False
+
+- name: beancount_reports exists
+  stat:
+    path: "{{ personal }}/beancount_reports"
+  register: beancount_reports
+  tags:
+    - install
+    - personal-project
+- name: Personal Project beancount_reports
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/beancount_reports.git"
+    bare: true
+    dest: "{{ personal }}/beancount_reports/.bare"
+  tags:
+    - install
+    - personal-project
+  when: beancount_reports.stat.exists == False
+- name: beancount_reports Setup git dir
+  copy:
+    dest: "~/repos/personal/beancount_reports/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: beancount_reports.stat.exists == False
+- name: beancount_reports fix remote fetch
+  shell: cd ~/repos/personal/beancount_reports && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: beancount_reports.stat.exists == False
+- name: beancount_reports Master Checkout
+  shell: cd ~/repos/personal/beancount_reports && git fetch && git worktree add main main
+  tags:
+    - install
+    - personal-project
+  when: beancount_reports.stat.exists == False
