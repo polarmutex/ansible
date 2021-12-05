@@ -590,3 +590,41 @@
     - install
     - personal-project
   when: beancount_reports.stat.exists == False
+
+- name: advent-of-code exists
+  stat:
+    path: "{{ personal }}/advent-of-code"
+  register: advent_of_code
+  tags:
+    - install
+    - personal-project
+- name: Personal Project advent-of-code
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/advent-of-code.git"
+    bare: true
+    dest: "{{ personal }}/advent-of-code/.bare"
+  tags:
+    - install
+    - personal-project
+  when: advent_of_code.stat.exists == False
+- name: advent-of-code Setup git dir
+  copy:
+    dest: "~/repos/personal/advent-of-code/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: advent_of_code.stat.exists == False
+- name: advent-of-code fix remote fetch
+  shell: cd ~/repos/personal/advent-of-code && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: advent_of_code.stat.exists == False
+- name: advent-of-code Master Checkout
+  shell: cd ~/repos/personal/advent-of-code && git fetch && git worktree add main main
+  tags:
+    - install
+    - personal-project
+  when: advent_of_code.stat.exists == False
