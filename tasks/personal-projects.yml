@@ -1,4 +1,4 @@
-- name: Harpoon exists
+- name: nix-dotfiles exists
   stat:
     path: "{{ personal }}/nix-dotfiles"
   register: nix_dotfiles
@@ -16,6 +16,44 @@
     - core
     - personal-project
   when: nix_dotfiles.stat.exists == False
+
+- name: nix-systems exists
+  stat:
+    path: "{{ personal }}/nix-systems"
+  register: nix_systems
+  tags:
+    - install
+    - core
+    - personal-project
+- name: Personal Project nix-systems
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/nix-systems.git"
+    bare: false
+    dest: "{{ personal }}/nix-systems"
+  tags:
+    - install
+    - core
+    - personal-project
+  when: nix_systems.stat.exists == False
+
+- name: neovim-flake exists
+  stat:
+    path: "{{ personal }}/neovim-flake"
+  register: neovim_flake
+  tags:
+    - install
+    - core
+    - personal-project
+- name: Personal Project neovim-flake
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/neovim-flake.git"
+    bare: false
+    dest: "{{ personal }}/neovim-flake"
+  tags:
+    - install
+    - core
+    - personal-project
+  when: neovim_flake.stat.exists == False
 
 - name: git-worktree exists
   stat:
