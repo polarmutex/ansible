@@ -598,6 +598,7 @@
   tags:
     - install
     - personal-project
+    - aoc
 - name: Personal Project advent-of-code
   ansible.builtin.git:
     repo: "git@github.com:polarmutex/advent-of-code.git"
@@ -606,6 +607,7 @@
   tags:
     - install
     - personal-project
+    - aoc
   when: advent_of_code.stat.exists == False
 - name: advent-of-code Setup git dir
   copy:
@@ -615,16 +617,19 @@
   tags:
     - install
     - personal-project
+    - aoc
   when: advent_of_code.stat.exists == False
 - name: advent-of-code fix remote fetch
   shell: cd ~/repos/personal/advent-of-code && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
   tags:
     - install
     - personal-project
+    - aoc
   when: advent_of_code.stat.exists == False
 - name: advent-of-code Master Checkout
   shell: cd ~/repos/personal/advent-of-code && git fetch && git worktree add main main
   tags:
     - install
     - personal-project
+    - aoc
   when: advent_of_code.stat.exists == False
