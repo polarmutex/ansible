@@ -225,6 +225,44 @@
     - personal-project
   when: brianryall_xyz.stat.exists == False
 
+- name: beancount importers exists
+  stat:
+    path: "{{ personal }}/beancount-importers"
+  register: beancount_importers
+  tags:
+    - install
+    - personal-project
+- name: Personal Project beancount importers
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/beancount-importers.git"
+    bare: true
+    dest: "{{ personal }}/beancount-importers/.bare"
+  tags:
+    - install
+    - personal-project
+  when: beancount_importers.stat.exists == False
+- name: beancount-importers Setup git dir
+  copy:
+    dest: "~/repos/personal/beancount-importers/.git"
+    content: |
+      gitdir: ./.bare
+  tags:
+    - install
+    - personal-project
+  when: beancount_importers.stat.exists == False
+- name: beancount-importers fix remote fetch
+  shell: cd ~/repos/personal/beancount-importers && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch
+  tags:
+    - install
+    - personal-project
+  when: beancount_importers.stat.exists == False
+- name: beancount-importers Master Checkout
+  shell: cd ~/repos/personal/beancount-importers && git fetch && git worktree add main main
+  tags:
+    - install
+    - personal-project
+  when: beancount_importers.stat.exists == False
+
 - name: beancount.nvim exists
   stat:
     path: "{{ personal }}/beancount.nvim"
