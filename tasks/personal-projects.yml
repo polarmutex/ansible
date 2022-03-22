@@ -709,3 +709,23 @@
     - personal-project
     - aoc
   when: advent_of_code.stat.exists == False
+
+  
+- name: beancount-text-utils exists
+  stat:
+    path: "{{ personal }}/beancount-text-utils"
+  register: beancount_text_utils
+  tags:
+    - install
+    - core
+    - personal-project
+- name: Personal Project beancount-text-utils
+  ansible.builtin.git:
+    repo: "git@github.com:polarmutex/beancount-text-utils.git"
+    bare: false
+    dest: "{{ personal }}/beancount-text-utils"
+  tags:
+    - install
+    - core
+    - personal-project
+  when: beancount_text_utils.stat.exists == False
