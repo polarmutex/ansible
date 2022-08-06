@@ -3,4 +3,4 @@
     personal: "{{ lookup('env', 'HOME') }}/repos/personal"
   pre_tasks:
   tasks:
-    - include: tasks/personal-projects.yml
+    - include: tasks/repos.yml

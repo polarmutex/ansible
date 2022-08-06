@@ -1,0 +1,32 @@
+- name: check normal repos exist
+  stat:
+    path: "{{personal}}/{{item.name}}"
+  register: stat_nc_norm_repos
+  with_items:
+    - {name: "ansible", url: "git@github.com:polarmutex/ansible.git", default_branch: "main"}
+    - {name: "nix-config", url: "git@github.com:polarmutex/nix-config.git", default_branch: "main"}
+
+- name: clone normal repos 
+  ansible.builtin.git:
+    repo: "{{item.item.url}}"
+    dest: "{{personal}}/{{item.item.name}}"
+  with_items:
+    - "{{stat_nc_norm_repos.results}}"
+  when: item.stat.exists == False
+
+- name: check worktree repos exist
+  stat:
+    path: "{{personal}}/{{item.name}}"
+  register: stat_nc_repos
+  with_items:
+    - {name: "beancount-language-server", url: "git@github.com:polarmutex/beancount-language-server.git", default_branch: "master"}
+
+- name: clone worktree repos 
+  ansible.builtin.git:
+    repo: "{{item.item.url}}"
+    separate_git_dir: "{{personal}}/{{item.item.name}}/.bare"
+    dest: "{{personal}}/{{item.item.name}}/{{item.item.default_branch}}"
+  with_items:
+    - "{{stat_nc_repos.results}}"
+  when: item.stat.exists == False
+
