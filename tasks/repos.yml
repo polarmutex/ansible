@@ -4,9 +4,14 @@
   register: stat_nc_norm_repos
   with_items:
     - {name: "ansible", url: "git@github.com:polarmutex/ansible.git", default_branch: "main"}
+    - {name: "advent-of-code", url: "git@github.com:polarmutex/advent-of-code.git", default_branch: "main"}
+    - {name: "dmenu", url: "git@github.com:polarmutex/dmenu.git", default_branch: "custom"}
+    - {name: "dwm", url: "git@github.com:polarmutex/dwm.git", default_branch: "polar"}
     - {name: "nix-config", url: "git@github.com:polarmutex/nix-config.git", default_branch: "main"}
+    - {name: "nur", url: "git@github.com:polarmutex/nur.git", default_branch: "master"}
+    - {name: "st", url: "git@github.com:polarmutex/st.git", default_branch: "custom"}
 
-- name: clone normal repos 
+- name: clone normal repos
   ansible.builtin.git:
     repo: "{{item.item.url}}"
     dest: "{{personal}}/{{item.item.name}}"
@@ -19,9 +24,22 @@
     path: "{{personal}}/{{item.name}}"
   register: stat_nc_repos
   with_items:
+    - {name: "awesome-flake", url: "git@github.com:polarmutex/awesome-flake.git", default_branch: "main"}
     - {name: "beancount-language-server", url: "git@github.com:polarmutex/beancount-language-server.git", default_branch: "master"}
+    - {name: "beancount-nvim", url: "git@github.com:polarmutex/beancount.nvim.git", default_branch: "master"}
+    - {name: "beangrow", url: "git@github.com:polarmutex/beangrow.git", default_branch: "master"}
+    - {name: "brianryall.xyz", url: "git@github.com:polarmutex/brianryall.xyz.git", default_branch: "main"}
+    - {name: "fava-envelope", url: "git@github.com:polarmutex/fava-envelope.git", default_branch: "master"}
+    - {name: "fava-income-reports", url: "git@github.com:polarmutex/fava-income-reports.git", default_branch: "main"}
+    - {name: "fava-portfolio-returns", url: "git@github.com:polarmutex/fava-portfolio-returns.git", default_branch: "main"}
+    - {name: "git-worktree-nvim", url: "git@github.com:polarmutex/git-worktree.nvim.git", default_branch: "master"}
+    - {name: "harpoon", url: "git@github.com:polarmutex/harpoon.git", default_branch: "master"}
+    - {name: "neovim-flake", url: "git@github.com:polarmutex/neovim-flake.git", default_branch: "main"}
+    - {name: "nixpkgs", url: "git@github.com:polarmutex/nixpkgs.git", default_branch: "master"}
+    - {name: "refactoring-nvim", url: "git@github.com:polarmutex/refactoring.nvim.git", default_branch: "master"}
+    - {name: "tree-sitter-beancount", url: "git@github.com:polarmutex/tree-sitter-beancount.git", default_branch: "master"}
 
-- name: clone worktree repos 
+- name: clone worktree repos
   ansible.builtin.git:
     repo: "{{item.item.url}}"
     separate_git_dir: "{{personal}}/{{item.item.name}}/.bare"
