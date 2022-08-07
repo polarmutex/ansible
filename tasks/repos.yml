@@ -3,12 +3,20 @@
     path: "{{personal}}/{{item.name}}"
   register: stat_nc_norm_repos
   with_items:
+    - {name: "anki-bible", url: "git@git.brianryall.xyz:polarmutex/anki-bible.git", default_branch: "main"}
     - {name: "ansible", url: "git@github.com:polarmutex/ansible.git", default_branch: "main"}
     - {name: "advent-of-code", url: "git@github.com:polarmutex/advent-of-code.git", default_branch: "main"}
+    - {name: "beancount", url: "git@git.brianryall.xyz:polarmutex/beancount.git", default_branch: "main"}
+    - {name: "cv", url: "git@git.brianryall.xyz:polarmutex/cv.git", default_branch: "main"}
+    - {name: "dendron-workspace", url: "git@git.brianryall.xyz:polarmutex/dendron_workspace.git", default_branch: "main"}
+    - {name: "dendron-biblelog", url: "git@git.brianryall.xyz:polarmutex/biblelog.git", default_branch: "main"}
+    - {name: "dendron-devlog", url: "git@git.brianryall.xyz:polarmutex/devlog.git", default_branch: "main"}
     - {name: "dmenu", url: "git@github.com:polarmutex/dmenu.git", default_branch: "custom"}
     - {name: "dwm", url: "git@github.com:polarmutex/dwm.git", default_branch: "polar"}
     - {name: "nix-config", url: "git@github.com:polarmutex/nix-config.git", default_branch: "main"}
     - {name: "nur", url: "git@github.com:polarmutex/nur.git", default_branch: "master"}
+    - {name: "obsidian-vaults", url: "git@git.brianryall.xyz:polarmutex/vaults.git", default_branch: "main"}
+    - {name: "personal_kanban", url: "git@git.brianryall.xyz:polarmutex/personal_kanban.git", default_branch: "main"}
     - {name: "st", url: "git@github.com:polarmutex/st.git", default_branch: "custom"}
 
 - name: clone normal repos
