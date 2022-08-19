@@ -14,10 +14,12 @@
     - {name: "dmenu", url: "git@github.com:polarmutex/dmenu.git", default_branch: "custom"}
     - {name: "dwm", url: "git@github.com:polarmutex/dwm.git", default_branch: "polar"}
     - {name: "nix-config", url: "git@github.com:polarmutex/nix-config.git", default_branch: "main"}
-    - {name: "nur", url: "git@github.com:polarmutex/nur.git", default_branch: "master"}
+    - {name: "nur", url: "git@github.com:polarmutex/nur.git", default_branch: "master"} # TODDO master
     - {name: "obsidian-vaults", url: "git@git.brianryall.xyz:polarmutex/vaults.git", default_branch: "main"}
     - {name: "personal_kanban", url: "git@git.brianryall.xyz:polarmutex/personal_kanban.git", default_branch: "main"}
     - {name: "st", url: "git@github.com:polarmutex/st.git", default_branch: "custom"}
+    - {name: "tmux-sessionizer", url: "git@github.com:polarmutex/tmux-sessionizer.git", default_branch: "main"}
+    - {name: "obsidian-bible-converter", url: "git@github.com:polarmutex/BibleGateway-to-Obsidian.git", default_branch: "master"}
 
 - name: clone normal repos
   ansible.builtin.git:
@@ -33,11 +35,11 @@
   register: stat_nc_repos
   with_items:
     - {name: "awesome-flake", url: "git@github.com:polarmutex/awesome-flake.git", default_branch: "main"}
-    - {name: "beancount-language-server", url: "git@github.com:polarmutex/beancount-language-server.git", default_branch: "master"}
-    - {name: "beancount-nvim", url: "git@github.com:polarmutex/beancount.nvim.git", default_branch: "master"}
+    - {name: "beancount-language-server", url: "git@github.com:polarmutex/beancount-language-server.git", default_branch: "master"} #TODO master
+    - {name: "beancount-nvim", url: "git@github.com:polarmutex/beancount.nvim.git", default_branch: "master"} #TODO master
     - {name: "beangrow", url: "git@github.com:polarmutex/beangrow.git", default_branch: "master"}
     - {name: "brianryall.xyz", url: "git@github.com:polarmutex/brianryall.xyz.git", default_branch: "main"}
-    - {name: "fava-envelope", url: "git@github.com:polarmutex/fava-envelope.git", default_branch: "master"}
+    - {name: "fava-envelope", url: "git@github.com:polarmutex/fava-envelope.git", default_branch: "master"} #TODO master
     - {name: "fava-income-reports", url: "git@github.com:polarmutex/fava-income-reports.git", default_branch: "main"}
     - {name: "fava-portfolio-returns", url: "git@github.com:polarmutex/fava-portfolio-returns.git", default_branch: "main"}
     - {name: "git-worktree-nvim", url: "git@github.com:polarmutex/git-worktree.nvim.git", default_branch: "master"}
@@ -45,7 +47,7 @@
     - {name: "neovim-flake", url: "git@github.com:polarmutex/neovim-flake.git", default_branch: "main"}
     - {name: "nixpkgs", url: "git@github.com:polarmutex/nixpkgs.git", default_branch: "master"}
     - {name: "refactoring-nvim", url: "git@github.com:polarmutex/refactoring.nvim.git", default_branch: "master"}
-    - {name: "tree-sitter-beancount", url: "git@github.com:polarmutex/tree-sitter-beancount.git", default_branch: "master"}
+    - {name: "tree-sitter-beancount", url: "git@github.com:polarmutex/tree-sitter-beancount.git", default_branch: "master"} #TODO master
 
 - name: clone worktree repos
   ansible.builtin.git:
