@@ -20,6 +20,8 @@
     - {name: "st", url: "git@github.com:polarmutex/st.git", default_branch: "custom"}
     - {name: "tmux-sessionizer", url: "git@github.com:polarmutex/tmux-sessionizer.git", default_branch: "main"}
     - {name: "obsidian-bible-converter", url: "git@github.com:polarmutex/BibleGateway-to-Obsidian.git", default_branch: "master"}
+    - {name: "qmk", url: "git@github.com:polarmutex/qmk_firmware.git", default_branch: "master"}
+
 
 - name: clone normal repos
   ansible.builtin.git:
