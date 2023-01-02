@@ -37,8 +37,10 @@
   register: stat_nc_repos
   with_items:
     - {name: "awesome-flake", url: "git@github.com:polarmutex/awesome-flake.git", default_branch: "main"}
+    - {name: "leftwm-flake", url: "git@github.com:polarmutex/leftwm-flake.git", default_branch: "main"}
     - {name: "beancount-language-server", url: "git@github.com:polarmutex/beancount-language-server.git", default_branch: "master"} #TODO master
     - {name: "beancount-nvim", url: "git@github.com:polarmutex/beancount.nvim.git", default_branch: "master"} #TODO master
+    - {name: "beancount-importers", url: "git@git.brianryall.xyz:polarmutex/beancount-importers.git", default_branch: "main"}
     - {name: "beangrow", url: "git@github.com:polarmutex/beangrow.git", default_branch: "master"}
     - {name: "brianryall.xyz", url: "git@github.com:polarmutex/brianryall.xyz.git", default_branch: "main"}
     - {name: "fava-envelope", url: "git@github.com:polarmutex/fava-envelope.git", default_branch: "master"} #TODO master
@@ -50,6 +52,8 @@
     - {name: "nixpkgs", url: "git@github.com:polarmutex/nixpkgs.git", default_branch: "master"}
     - {name: "refactoring-nvim", url: "git@github.com:polarmutex/refactoring.nvim.git", default_branch: "master"}
     - {name: "tree-sitter-beancount", url: "git@github.com:polarmutex/tree-sitter-beancount.git", default_branch: "master"} #TODO master
+    - {name: "vim-be-good", url: "git@github.com:polarmutex/vim-be-good.git", default_branch: "master"}
+    - {name: "monolisa-font-flake", url: "git@git.brianryall.xyz:polarmutex/monolisa-font-flake.git", default_branch: "main"}
 
 - name: clone worktree repos
   ansible.builtin.git:
