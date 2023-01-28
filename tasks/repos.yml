@@ -50,6 +50,7 @@
     - {name: "harpoon", url: "git@github.com:polarmutex/harpoon.git", default_branch: "master"}
     - {name: "neovim-flake", url: "git@github.com:polarmutex/neovim-flake.git", default_branch: "main"}
     - {name: "nixpkgs", url: "git@github.com:polarmutex/nixpkgs.git", default_branch: "master"}
+    - {name: "nvim-treesitter", url: "git@github.com:polarmutex/nvim-treesitter.git", default_branch: "master"}
     - {name: "refactoring-nvim", url: "git@github.com:polarmutex/refactoring.nvim.git", default_branch: "master"}
     - {name: "tree-sitter-beancount", url: "git@github.com:polarmutex/tree-sitter-beancount.git", default_branch: "master"} #TODO master
     - {name: "vim-be-good", url: "git@github.com:polarmutex/vim-be-good.git", default_branch: "master"}
