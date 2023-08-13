@@ -1,67 +1,46 @@
-- name: check normal repos exist
-  stat:
-    path: "{{personal}}/{{item.name}}"
-  register: stat_nc_norm_repos
-  with_items:
-    - {name: "anki-bible", url: "git@git.brianryall.xyz:polarmutex/anki-bible.git", default_branch: "main"}
-    - {name: "ansible", url: "git@github.com:polarmutex/ansible.git", default_branch: "main"}
-    - {name: "advent-of-code", url: "git@github.com:polarmutex/advent-of-code.git", default_branch: "main"}
-    - {name: "beancount", url: "git@git.brianryall.xyz:polarmutex/beancount.git", default_branch: "main"}
-    - {name: "cv", url: "git@git.brianryall.xyz:polarmutex/cv.git", default_branch: "main"}
-    - {name: "dendron-workspace", url: "git@git.brianryall.xyz:polarmutex/dendron_workspace.git", default_branch: "main"}
-    - {name: "dendron-biblelog", url: "git@git.brianryall.xyz:polarmutex/biblelog.git", default_branch: "main"}
-    - {name: "dendron-devlog", url: "git@git.brianryall.xyz:polarmutex/devlog.git", default_branch: "main"}
-    - {name: "dmenu", url: "git@github.com:polarmutex/dmenu.git", default_branch: "custom"}
-    - {name: "dwm", url: "git@github.com:polarmutex/dwm.git", default_branch: "polar"}
-    - {name: "nix-config", url: "git@github.com:polarmutex/nix-config.git", default_branch: "main"}
-    - {name: "nur", url: "git@github.com:polarmutex/nur.git", default_branch: "master"} # TODDO master
-    - {name: "obsidian-vaults", url: "git@git.brianryall.xyz:polarmutex/vaults.git", default_branch: "main"}
-    - {name: "personal_kanban", url: "git@git.brianryall.xyz:polarmutex/personal_kanban.git", default_branch: "main"}
-    - {name: "st", url: "git@github.com:polarmutex/st.git", default_branch: "custom"}
-    - {name: "tmux-sessionizer", url: "git@github.com:polarmutex/tmux-sessionizer.git", default_branch: "main"}
-    - {name: "obsidian-bible-converter", url: "git@github.com:polarmutex/BibleGateway-to-Obsidian.git", default_branch: "master"}
-    - {name: "qmk", url: "git@github.com:polarmutex/qmk_firmware.git", default_branch: "master"}
-
-
-- name: clone normal repos
-  ansible.builtin.git:
-    repo: "{{item.item.url}}"
-    dest: "{{personal}}/{{item.item.name}}"
-  with_items:
-    - "{{stat_nc_norm_repos.results}}"
-  when: item.stat.exists == False
-
+---
 - name: check worktree repos exist
   stat:
-    path: "{{personal}}/{{item.name}}"
+    path: '{{personal}}/{{item.name}}'
   register: stat_nc_repos
   with_items:
-    - {name: "awesome-flake", url: "git@github.com:polarmutex/awesome-flake.git", default_branch: "main"}
-    - {name: "leftwm-flake", url: "git@github.com:polarmutex/leftwm-flake.git", default_branch: "main"}
-    - {name: "beancount-language-server", url: "git@github.com:polarmutex/beancount-language-server.git", default_branch: "master"} #TODO master
-    - {name: "beancount-nvim", url: "git@github.com:polarmutex/beancount.nvim.git", default_branch: "master"} #TODO master
-    - {name: "beancount-importers", url: "git@git.brianryall.xyz:polarmutex/beancount-importers.git", default_branch: "main"}
-    - {name: "beangrow", url: "git@github.com:polarmutex/beangrow.git", default_branch: "master"}
-    - {name: "brianryall.xyz", url: "git@github.com:polarmutex/brianryall.xyz.git", default_branch: "main"}
-    - {name: "fava-envelope", url: "git@github.com:polarmutex/fava-envelope.git", default_branch: "master"} #TODO master
-    - {name: "fava-income-reports", url: "git@github.com:polarmutex/fava-income-reports.git", default_branch: "main"}
-    - {name: "fava-portfolio-returns", url: "git@github.com:polarmutex/fava-portfolio-returns.git", default_branch: "main"}
-    - {name: "git-worktree-nvim", url: "git@github.com:polarmutex/git-worktree.nvim.git", default_branch: "master"}
-    - {name: "harpoon", url: "git@github.com:polarmutex/harpoon.git", default_branch: "master"}
-    - {name: "neovim-flake", url: "git@github.com:polarmutex/neovim-flake.git", default_branch: "main"}
-    - {name: "nixpkgs", url: "git@github.com:polarmutex/nixpkgs.git", default_branch: "master"}
-    - {name: "nvim-treesitter", url: "git@github.com:polarmutex/nvim-treesitter.git", default_branch: "master"}
-    - {name: "refactoring-nvim", url: "git@github.com:polarmutex/refactoring.nvim.git", default_branch: "master"}
-    - {name: "tree-sitter-beancount", url: "git@github.com:polarmutex/tree-sitter-beancount.git", default_branch: "master"} #TODO master
-    - {name: "vim-be-good", url: "git@github.com:polarmutex/vim-be-good.git", default_branch: "master"}
-    - {name: "monolisa-font-flake", url: "git@git.brianryall.xyz:polarmutex/monolisa-font-flake.git", default_branch: "main"}
-
-- name: clone worktree repos
+    - {name: advent-of-code, url: git@github.com:polarmutex/advent-of-code.git,  default_branch: main}
+    - {name: ansible, url: git@github.com:polarmutex/ansible.git, default_branch: main}
+    - {name: awesome-flake, url: git@github.com:polarmutex/awesome-flake.git, default_branch: main}
+    - {name: beancount, url: git@git.brianryall.xyz:polarmutex/beancount.git, default_branch: main}
+    - {name: beancount-language-server, url: git@github.com:polarmutex/beancount-language-server.git,  default_branch: master}  # TODO master
+    - {name: beancount-nvim, url: git@github.com:polarmutex/beancount.nvim.git,  default_branch: master}  # TODO master
+    - {name: cv, url: git@git.brianryall.xyz:polarmutex/cv.git, default_branch: main}
+    - {name: fava-envelope, url: git@github.com:polarmutex/fava-envelope.git, default_branch: master}  # TODO master
+    - {name: git-worktree-nvim, url: git@github.com:polarmutex/git-worktree.nvim.git, default_branch: master}
+    - {name: leftwm-flake, url: git@github.com:polarmutex/leftwm-flake.git, default_branch: main}
+    - {name: monolisa-font-flake, url: git@git.brianryall.xyz:polarmutex/monolisa-font-flake.git,  default_branch: main}
+    - {name: neovim-flake, url: git@github.com:polarmutex/neovim-flake.git, default_branch: main}
+    - {name: nix-config, url: git@github.com:polarmutex/nix-config.git, default_branch: main}
+    - {name: nixpkgs, url: git@github.com:polarmutex/nixpkgs.git, default_branch: master}
+    - {name: obsidian-second-brain, url: git@git.brianryall.xyz:polarmutex/obsidian-second-brain.git, default_branch: main}
+    - {name: tmux-sessionizer, url: git@github.com:polarmutex/tmux-sessionizer.git, default_branch: main}
+    - {name: tree-sitter-beancount, url: git@github.com:polarmutex/tree-sitter-beancount.git, default_branch: master}  # TODO master
+    - {name: qmk, url: git@github.com:polarmutex/qmk_firmware.git, default_branch: master}
+    - {name: vim-be-good, url: git@github.com:polarmutex/vim-be-good.git, default_branch: master}
+    - {name: wallpapers, url: git@git.brianryall.xyz:polarmutex/wallpapers.git, default_branch: main}
+    - {name: website, url: git@git.brianryall.xyz:polarmutex/website.git, default_branch: main}
+- name: clone bare repos
   ansible.builtin.git:
-    repo: "{{item.item.url}}"
-    separate_git_dir: "{{personal}}/{{item.item.name}}/.bare"
-    dest: "{{personal}}/{{item.item.name}}/{{item.item.default_branch}}"
-  with_items:
-    - "{{stat_nc_repos.results}}"
+    repo: '{{item.item.url}}'
+    bare: true
+    #separate_git_dir: '{{personal}}/{{item.item.name}}/.bare'
+    dest: '{{personal}}/{{item.item.name}}/.bare'
+  with_items: ['{{stat_nc_repos.results}}']
   when: item.stat.exists == False
-
+- name: setup git dir
+  copy:
+    dest: '{{personal}}/{{item.item.name}}/.git'
+    content: |
+      gitdir: ./.bare
+  with_items: ['{{stat_nc_repos.results}}']
+  when: item.stat.exists == False
+- name: create default branch worktree
+  shell: cd {{personal}}/{{item.item.name}} && git worktree add {{item.item.default_branch}} {{item.item.default_branch}}
+  with_items: ['{{stat_nc_repos.results}}']
+  when: item.stat.exists == False
