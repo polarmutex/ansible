@@ -25,26 +25,28 @@
     - {name: vim-be-good, url: git@github.com:polarmutex/vim-be-good.git, default_branch: master}
     - {name: wallpapers, url: git@git.brianryall.xyz:polarmutex/wallpapers.git, default_branch: main}
     - {name: website, url: git@git.brianryall.xyz:polarmutex/website.git, default_branch: main}
+    - {name: bible-to-obsidian, url: git@github.com:polarmutex/BibleGateway-to-Obsidian.git, default_branch: master}
+
 - name: clone bare repos
   ansible.builtin.git:
     repo: '{{item.item.url}}'
-    bare: true
+    bare: false
     #separate_git_dir: '{{personal}}/{{item.item.name}}/.bare'
     dest: '{{personal}}/{{item.item.name}}/.bare'
   with_items: ['{{stat_nc_repos.results}}']
   when: item.stat.exists == False
-- name: setup git dir
-  copy:
-    dest: '{{personal}}/{{item.item.name}}/.git'
-    content: |
-      gitdir: ./.bare
+#- name: setup git dir
+#  copy:
+#    dest: '{{personal}}/{{item.item.name}}/.git'
+#    content: |
+#      gitdir: ./.bare
+#  with_items: ['{{stat_nc_repos.results}}']
+#  when: item.stat.exists == False
+- name: set initial clone to first commit
+  shell: cd {{personal}}/{{item.item.name}}/.bare && git checkout $(git commit-tree $(git hash-object -t tree /dev/null) < /dev/null)
   with_items: ['{{stat_nc_repos.results}}']
   when: item.stat.exists == False
 - name: create default branch worktree
-  shell: cd {{personal}}/{{item.item.name}} && git worktree add {{item.item.default_branch}} {{item.item.default_branch}}
-  with_items: ['{{stat_nc_repos.results}}']
-  when: item.stat.exists == False
-- name: fix bare repo to fetch new branches
-  shell: cd {{personal}}/{{item.item.name}} && git config remote.origin.fetch 'refs/heads/*:refs/heads/*'
+  shell: cd {{personal}}/{{item.item.name}}/.bare && git worktree add ../{{item.item.default_branch}} {{item.item.default_branch}}
   with_items: ['{{stat_nc_repos.results}}']
   when: item.stat.exists == False
