@@ -8,7 +8,7 @@
     - {name: ansible, url: git@github.com:polarmutex/ansible.git, default_branch: main}
     - {name: awesome-flake, url: git@github.com:polarmutex/awesome-flake.git, default_branch: main}
     - {name: beancount, url: git@git.brianryall.xyz:polarmutex/beancount.git, default_branch: main}
-    - {name: beancount-language-server, url: git@github.com:polarmutex/beancount-language-server.git,  default_branch: master}  # TODO master
+    - {name: beancount-language-server, url: git@github.com:polarmutex/beancount-language-server.git,  default_branch: main}
     - {name: beancount-nvim, url: git@github.com:polarmutex/beancount.nvim.git,  default_branch: master}  # TODO master
     - {name: cv, url: git@git.brianryall.xyz:polarmutex/cv.git, default_branch: main}
     - {name: fava-envelope, url: git@github.com:polarmutex/fava-envelope.git, default_branch: master}  # TODO master
@@ -19,13 +19,16 @@
     - {name: nix-config, url: git@github.com:polarmutex/nix-config.git, default_branch: main}
     - {name: nixpkgs, url: git@github.com:polarmutex/nixpkgs.git, default_branch: master}
     - {name: obsidian-second-brain, url: git@git.brianryall.xyz:polarmutex/obsidian-second-brain.git, default_branch: main}
-    - {name: tmux-sessionizer, url: git@github.com:polarmutex/tmux-sessionizer.git, default_branch: main}
+    - {name: zellij-sessionizer, url: git@github.com:polarmutex/zellij-sessionizer.git, default_branch: main}
     - {name: tree-sitter-beancount, url: git@github.com:polarmutex/tree-sitter-beancount.git, default_branch: master}  # TODO master
     - {name: qmk, url: git@github.com:polarmutex/qmk_firmware.git, default_branch: master}
     - {name: vim-be-good, url: git@github.com:polarmutex/vim-be-good.git, default_branch: master}
     - {name: wallpapers, url: git@git.brianryall.xyz:polarmutex/wallpapers.git, default_branch: main}
-    - {name: website, url: git@git.brianryall.xyz:polarmutex/website.git, default_branch: main}
+    - {name: website, url: git@github.com:polarmutex/website.git, default_branch: main}
     - {name: bible-to-obsidian, url: git@github.com:polarmutex/BibleGateway-to-Obsidian.git, default_branch: master}
+    - {name: pdm2nix, url: git@github.com:polarmutex/pdm2nix.git, default_branch: master}
+    - {name: hack-pack-turret, url: git@github.com:polarmutex/hack-pack-turret.git, default_branch: main}
+    - {name: polar-nur, url: git@github.com:polarmutex/nur.git, default_branch: master}
 
 - name: clone bare repos
   ansible.builtin.git:

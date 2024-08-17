@@ -3,4 +3,6 @@
     personal: "{{ lookup('env', 'HOME') }}/repos/personal"
   pre_tasks:
   tasks:
-    - include: tasks/repos.yml
+    - name: install repos
+      ansible.builtin.include_tasks:
+        file: tasks/repos.yml
