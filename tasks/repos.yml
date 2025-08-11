@@ -19,7 +19,7 @@
     - {name: nix-config, url: git@github.com:polarmutex/nix-config.git, default_branch: main}
     - {name: nixpkgs, url: git@github.com:polarmutex/nixpkgs.git, default_branch: master}
     - {name: obsidian-second-brain, url: git@git.brianryall.xyz:polarmutex/obsidian-second-brain.git, default_branch: main}
-    - {name: zellij-sessionizer, url: git@github.com:polarmutex/zellij-sessionizer.git, default_branch: main}
+    - {name: tmux-sessionizer, url: git@github.com:polarmutex/tmux-sessionizer.git, default_branch: main}
     - {name: tree-sitter-beancount, url: git@github.com:polarmutex/tree-sitter-beancount.git, default_branch: master}  # TODO master
     - {name: qmk, url: git@github.com:polarmutex/qmk_firmware.git, default_branch: master}
     - {name: vim-be-good, url: git@github.com:polarmutex/vim-be-good.git, default_branch: master}
@@ -29,6 +29,9 @@
     - {name: pdm2nix, url: git@github.com:polarmutex/pdm2nix.git, default_branch: master}
     - {name: hack-pack-turret, url: git@github.com:polarmutex/hack-pack-turret.git, default_branch: main}
     - {name: polar-nur, url: git@github.com:polarmutex/nur.git, default_branch: master}
+    - {name: beangrow, url: git@github.com:polarmutex/beangrow.git, default_branch: polar}
+    - {name: fava-portfolio-returns, url: git@github.com:polarmutex/fava-portfolio-returns.git, default_branch: main}
+    - {name: ftc-25805-website, url: git@github.com:ftc-25805/ftc-25805.github.io.git, default_branch: main}
 
 - name: clone bare repos
   ansible.builtin.git:
